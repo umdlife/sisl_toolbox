@@ -21,7 +21,7 @@ int main() {
 
         // std::cout << *(*spiral)[0] << std::endl;
 
-        PersistenceManager::SaveObj(spiral->Sampling(500), "/home/antonino/Desktop/sisl_toolbox/script/path.txt");
+        PersistenceManager::SaveObj(spiral->Sampling(500), "/home/antonio/sisl_toolbox/script/path.txt");
 
         double abscissaCurve_m{0};
         int curveId{0};
@@ -46,11 +46,11 @@ int main() {
         /***************** Intersection Problem  *****************/
 
         std::ofstream outputIntersection;
-        outputIntersection.open ("/home/antonino/Desktop/sisl_toolbox/script/intersectionPoints.txt");
+        outputIntersection.open ("/home/antonio/sisl_toolbox/script/intersectionPoints.txt");
         auto intersectingCurve = std::make_shared<CircularArc>(6.28, Eigen::Vector3d{0, 0, 1}, Eigen::Vector3d{60, 37, 0}, Eigen::Vector3d{45, 35, 0});
         auto intersectingPath = std::make_shared<Path>();
         intersectingPath->AddCurveBack(intersectingCurve);
-        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/intersectingCurve.txt");
+        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonio/sisl_toolbox/script/intersectingCurve.txt");
 
         auto intersectionPoints = spiral->Intersection(intersectingPath);
 
@@ -67,7 +67,7 @@ int main() {
         /***************** Extract Path Section Problem  *****************/
 
         auto pathSection = spiral->ExtractSection(300, 700);
-        PersistenceManager::SaveObj(pathSection->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/pathSection.txt");
+        PersistenceManager::SaveObj(pathSection->Sampling(200), "/home/antonio/sisl_toolbox/script/pathSection.txt");
 
         /***************** Closest Point Problem  *****************/
 
@@ -80,7 +80,7 @@ int main() {
             << " the closest point on the path is [" << closestPoint[0] << ", " << closestPoint[1] << ", " << closestPoint[2] << "]" << std::endl;
         
         std::ofstream outputFile;
-        outputFile.open ("/home/antonino/Desktop/sisl_toolbox/script/closestPoint.txt");
+        outputFile.open ("/home/antonio/sisl_toolbox/script/closestPoint.txt");
         outputFile << "FindNear " << findNearThis[0] << " " << findNearThis[1] << " " << findNearThis[2] << "\n";
         outputFile << "ClosestPoint " << closestPoint[0] << " " << closestPoint[1] << " " << closestPoint[2] << "\n";
         outputFile.close();
@@ -104,7 +104,7 @@ int main() {
         double abscissaStartPoint{10};
         double offset{30};
         std::ofstream outputFile2;
-        outputFile2.open ("/home/antonino/Desktop/sisl_toolbox/script/movePoint.txt"); 
+        outputFile2.open ("/home/antonio/sisl_toolbox/script/movePoint.txt");
 
         auto startPoint = spiral->At(abscissaStartPoint);
         std::cout << std::endl << "Point at abscissa: " << abscissaStartPoint << " is [" << startPoint[0] << ", " 

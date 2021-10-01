@@ -21,8 +21,8 @@ int main() {
                                                                         Eigen::Vector3d{-12, 8, 0}});
         */
 
-        polygon = PathFactory::NewPolygonalChain(std::vector<Eigen::Vector3d>{Eigen::Vector3d{0, 0, 0}, Eigen::Vector3d{2, 0, 0}, 
-                                                                        Eigen::Vector3d{2, 2, 0}});
+        polygon = PathFactory::NewPolygonalChain(std::vector<Eigen::Vector3d>{Eigen::Vector3d{0, 0, 0}, Eigen::Vector3d{2, 0, 2},
+                                                                        Eigen::Vector3d{2, 2, 3}});
 
         std::cout << *polygon << std::endl;
 
@@ -33,7 +33,7 @@ int main() {
         std::cout << "Time taken to build the Path object : " << std::fixed << std::setprecision(9) << time_taken  << " sec" << std::endl;
         std::cout << std::fixed << std::setprecision(3); 
 
-        PersistenceManager::SaveObj(polygon->Sampling(6), "/home/antonino/Desktop/sisl_toolbox/script/path.txt");
+        PersistenceManager::SaveObj(polygon->Sampling(6), "/home/antonio/sisl_toolbox/script/path.txt");
 
         double abscissaCurve_m{0};
         int curveId{0};
@@ -59,11 +59,11 @@ int main() {
 
         /*
         std::ofstream outputIntersection;
-        outputIntersection.open ("/home/antonino/Desktop/sisl_toolbox/script/intersectionPoints.txt");
+        outputIntersection.open ("/home/antonio/sisl_toolbox/script/intersectionPoints.txt");
         auto intersectingCurve = std::make_shared<CircularArc>(6.28, Eigen::Vector3d{0, 0, 1}, Eigen::Vector3d{60, 37, 0}, Eigen::Vector3d{50, 35, 0});
         auto intersectingPath = std::make_shared<Path>();
         intersectingPath->AddCurveBack(intersectingCurve);
-        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/intersectingCurve.txt");
+        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonio/sisl_toolbox/script/intersectingCurve.txt");
 
         auto intersectionPoints = polygon->Intersection(intersectingPath);
 
@@ -92,7 +92,7 @@ int main() {
             << " the closest point on the path is [" << closestPoint[0] << ", " << closestPoint[1] << ", " << closestPoint[2] << "]" << std::endl;
         
         std::ofstream outputFile;
-        outputFile.open ("/home/antonino/Desktop/sisl_toolbox/script/closestPoint.txt");
+        outputFile.open ("/home/antonio/sisl_toolbox/script/closestPoint.txt");
         outputFile << "FindNear " << findNearThis[0] << " " << findNearThis[1] << " " << findNearThis[2] << "\n";
         outputFile << "ClosestPoint " << closestPoint[0] << " " << closestPoint[1] << " " << closestPoint[2] << "\n";
         outputFile.close();
@@ -104,7 +104,7 @@ int main() {
         double abscissaStartPoint{10};
         double offset{30};
         std::ofstream outputFile2;
-        outputFile2.open ("/home/antonino/Desktop/sisl_toolbox/script/movePoint.txt"); 
+        outputFile2.open ("/home/antonio/sisl_toolbox/script/movePoint.txt");
 
         auto startPoint = polygon->At(abscissaStartPoint);
         std::cout << std::endl << "Point at abscissa: " << abscissaStartPoint << " is [" << startPoint[0] << ", " 
@@ -123,7 +123,7 @@ int main() {
         /***************** Extract Path Section Problem  *****************/
         /*
         auto pathSection = polygon->ExtractSection(5, 50);
-        PersistenceManager::SaveObj(pathSection->Sampling(100), "/home/antonino/Desktop/sisl_toolbox/script/pathSection.txt");
+        PersistenceManager::SaveObj(pathSection->Sampling(100), "/home/antonio/sisl_toolbox/script/pathSection.txt");
         */
     }
     catch(std::runtime_error const& exception) {

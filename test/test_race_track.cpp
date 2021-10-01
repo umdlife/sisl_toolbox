@@ -30,7 +30,7 @@ int main() {
         auto end = std::chrono::high_resolution_clock::now();
 
         auto polygon = PathFactory::NewPolygon(polygonVerteces);
-        PersistenceManager::SaveObj(polygon->Sampling(100), "/home/antonino/Desktop/sisl_toolbox/script/polygon.txt");
+        PersistenceManager::SaveObj(polygon->Sampling(100), "/home/antonio/sisl_toolbox/script/polygon.txt");
 
         std::cout << *raceTrack << std::endl;
 
@@ -40,7 +40,7 @@ int main() {
         std::cout << "Time taken to build the Path object : " << std::fixed << std::setprecision(9) << time_taken  << " sec" << std::endl;
         std::cout << std::fixed << std::setprecision(3); 
 
-        PersistenceManager::SaveObj(raceTrack->Sampling(1500), "/home/antonino/Desktop/sisl_toolbox/script/path.txt");
+        PersistenceManager::SaveObj(raceTrack->Sampling(1500), "/home/antonio/sisl_toolbox/script/path.txt");
 
         double abscissaCurve_m{0};
         int curveId{0};
@@ -65,11 +65,11 @@ int main() {
         /***************** Intersection Problem  *****************/
 
         std::ofstream outputIntersection;
-        outputIntersection.open ("/home/antonino/Desktop/sisl_toolbox/script/intersectionPoints.txt");
+        outputIntersection.open ("/home/antonio/sisl_toolbox/script/intersectionPoints.txt");
         auto intersectingCurve = std::make_shared<CircularArc>(6.28, Eigen::Vector3d{0, 0, 1}, Eigen::Vector3d{60, 37, 0}, Eigen::Vector3d{45, 35, 0});
         auto intersectingPath = std::make_shared<Path>();
         intersectingPath->AddCurveBack(intersectingCurve);
-        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/intersectingCurve.txt");
+        PersistenceManager::SaveObj(intersectingCurve->Sampling(200), "/home/antonio/sisl_toolbox/script/intersectingCurve.txt");
 
         auto intersectionPoints = raceTrack->Intersection(intersectingPath);
 
@@ -102,7 +102,7 @@ int main() {
             << " the closest point on the path is [" << closestPoint[0] << ", " << closestPoint[1] << ", " << closestPoint[2] << "]" << std::endl;
         
         std::ofstream outputFile;
-        outputFile.open ("/home/antonino/Desktop/sisl_toolbox/script/closestPoint.txt");
+        outputFile.open ("/home/antonio/sisl_toolbox/script/closestPoint.txt");
         outputFile << "FindNear " << findNearThis[0] << " " << findNearThis[1] << " " << findNearThis[2] << "\n";
         outputFile << "ClosestPoint " << closestPoint[0] << " " << closestPoint[1] << " " << closestPoint[2] << "\n";
         outputFile.close();
@@ -113,7 +113,7 @@ int main() {
         double abscissaStartPoint{10};
         double offset{30};
         std::ofstream outputFile2;
-        outputFile2.open ("/home/antonino/Desktop/sisl_toolbox/script/movePoint.txt"); 
+        outputFile2.open ("/home/antonio/sisl_toolbox/script/movePoint.txt");
 
         auto startPoint = raceTrack->At(abscissaStartPoint);
         std::cout << std::endl << "Point at abscissa: " << abscissaStartPoint << " is [" << startPoint[0] << ", " 
@@ -140,7 +140,7 @@ int main() {
         }
             
         if(pathSection)
-            PersistenceManager::SaveObj(pathSection->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/pathSection.txt");
+            PersistenceManager::SaveObj(pathSection->Sampling(200), "/home/antonio/sisl_toolbox/script/pathSection.txt");
 
         /***************** Test Derivate and Curvature *****************/
 

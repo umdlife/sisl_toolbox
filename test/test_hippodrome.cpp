@@ -22,8 +22,8 @@ int main() {
     //     << "]" << std::endl;
 
     try {
-        hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{-50, 10, 0}, Eigen::Vector3d{50, 10, 0}, 
-                                                                            Eigen::Vector3d{50, -10, 0}, Eigen::Vector3d{-50, -10, 20}});
+        hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{-50, 5, 0}, Eigen::Vector3d{-45, -5, 0},
+                                                                            Eigen::Vector3d{-45, 5, 0}, Eigen::Vector3d{-50, -5, 0}});
 
         // hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{10, -50, 0}, Eigen::Vector3d{10, 50, 0}, 
         //                                                                    Eigen::Vector3d{-10, 50, 0}, Eigen::Vector3d{-10, -50, 0}});
@@ -37,7 +37,7 @@ int main() {
         std::cout << "Time taken to build the Path object : " << std::fixed << std::setprecision(9) << time_taken  << " sec" << std::endl;
         std::cout << std::fixed << std::setprecision(3); 
 
-        PersistenceManager::SaveObj(hippodrome->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/path.txt");
+        PersistenceManager::SaveObj(hippodrome->Sampling(200), "/home/antonio/sisl_toolbox/script/path.txt");
 
         double abscissaCurve_m{0};
         int curveId{0};
@@ -98,11 +98,11 @@ int main() {
         /***************** Intersection Problem  *****************/
 
         std::ofstream outputIntersection;
-        outputIntersection.open ("/home/antonino/Desktop/sisl_toolbox/script/intersectionPoints.txt");
+        outputIntersection.open ("/home/antonio/sisl_toolbox/script/intersectionPoints.txt");
         auto line = std::make_shared<StraightLine>(Eigen::Vector3d{7.5, -2, 0}, Eigen::Vector3d{7.5, 12, 0});
         auto linePath = std::make_shared<Path>();
         linePath->AddCurveBack(line);
-        PersistenceManager::SaveObj(line->Sampling(200), "/home/antonino/Desktop/sisl_toolbox/script/intersectingCurve.txt");
+        PersistenceManager::SaveObj(line->Sampling(200), "/home/antonio/sisl_toolbox/script/intersectingCurve.txt");
 
         auto intersectionPoints = hippodrome->Intersection(linePath);
 
@@ -128,7 +128,7 @@ int main() {
             << " the closest point on the path is [" << closestPoint[0] << ", " << closestPoint[1] << ", " << closestPoint[2] << "]" << std::endl;
         
         std::ofstream outputFile;
-        outputFile.open ("/home/antonino/Desktop/sisl_toolbox/script/closestPoint.txt");
+        outputFile.open ("/home/antonio/sisl_toolbox/script/closestPoint.txt");
         outputFile << "FindNear " << findNearThis[0] << " " << findNearThis[1] << " " << findNearThis[2] << "\n";
         outputFile << "ClosestPoint " << closestPoint[0] << " " << closestPoint[1] << " " << closestPoint[2] << "\n";
         outputFile.close();
@@ -139,7 +139,7 @@ int main() {
         double abscissaStartPoint{10};
         double offset{30};
         std::ofstream outputFile2;
-        outputFile2.open ("/home/antonino/Desktop/sisl_toolbox/script/movePoint.txt"); 
+        outputFile2.open ("/home/antonio/sisl_toolbox/script/movePoint.txt");
 
         auto startPoint = hippodrome->At(abscissaStartPoint);
         std::cout << std::endl << "Point at abscissa: " << abscissaStartPoint << " is [" << startPoint[0] << ", " 
@@ -158,7 +158,7 @@ int main() {
         /***************** Extract Path Section Problem  *****************/
 
         auto pathSection = hippodrome->ExtractSection(5, 10);
-        PersistenceManager::SaveObj(pathSection->Sampling(100), "/home/antonino/Desktop/sisl_toolbox/script/pathSection.txt");
+        PersistenceManager::SaveObj(pathSection->Sampling(100), "/home/antonio/sisl_toolbox/script/pathSection.txt");
     
     } catch(std::runtime_error const& exception) {
         std::cout << "Received exception from --> " << exception.what() << std::endl;
