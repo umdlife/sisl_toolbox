@@ -1,4 +1,4 @@
-#include "sisl_toolbox/curve.hpp"
+﻿#include "sisl_toolbox/curve.hpp"
 #include "sisl.h"
 
 
@@ -292,4 +292,18 @@ void Curve::EvalTangentFrame(double abscissa_m, Eigen::Vector3d& tangent, Eigen:
 
     normal = tangent.cross(-Eigen::Vector3d::UnitZ());
     binormal = tangent.cross(normal);
+}
+
+void Curve::EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,Eigen::VectorXd& derivative)
+{
+
+    std::array<double, 3> worldF_position{ 0 };
+    int leftknot = 0;
+    Eigen::VectorXd derive = Eigen::VectorXd::Zero(12);
+    int kstat = 0;
+
+    s1221(curve_, 3, abscissa_s, &leftknot, &derive[0], &kstat );
+    s2559(curve_, &abscissa_s, 1, &worldF_position[0], &tangent[0], &normal[0], &binormal[0], &statusFlag_);
+
+
 }

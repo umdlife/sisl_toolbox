@@ -130,7 +130,19 @@ public:
 
     /**
     * @brief Eval intersection points between two curves.
-    * 
+    * void Curve::EvalTangentFrame(double abscissa_m, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal)
+{
+
+    std::array<double, 3> worldF_position{ 0 };
+
+    double abscissa_s{};
+    abscissa_s = MeterAbsToSislAbs(abscissa_m);
+
+    s2559(curve_, &abscissa_s, 1, &worldF_position[0], &tangent[0], &normal[0], &binormal[0], &statusFlag_);
+
+    normal = tangent.cross(-Eigen::Vector3d::UnitZ());
+    binormal = tangent.cross(normal);
+}
     * @param[in] otherCurve The other curve w.r.t. evaluate the intersections.
     * 
     * @return An std::vector<Eigen::Vector3d> containing all the intersection points.
@@ -150,6 +162,15 @@ public:
     */
     void EvalTangentFrame(double abscissa_m, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal);
 
+    /**
+    * @brief Compute the Frenet–Serret frame from the abscissa value.
+    * @param[in] abscissa Parameter value where to calculate the tangent frame.
+    * @param[out] tangent Tangent component of the tangent 3D frame.
+    * @param[out] normal Normal component of the tangent 3D frame.
+    * @param[out] binormal Binormal component of the tangent 3D frame.
+    * @param[out] Derivative of position,tanget,normal,binormal.
+    */
+    void EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,Eigen::VectorXd& derivative);
 
 
 
