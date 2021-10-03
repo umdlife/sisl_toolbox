@@ -294,16 +294,30 @@ void Curve::EvalTangentFrame(double abscissa_m, Eigen::Vector3d& tangent, Eigen:
     binormal = tangent.cross(normal);
 }
 
-void Curve::EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,Eigen::VectorXd& derivative)
+void Curve::EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,
+                        Eigen::Vector3d& der_tan, Eigen::Vector3d& der_nor, Eigen::Vector3d& der_bin)
 {
 
     std::array<double, 3> worldF_position{ 0 };
-    int leftknot = 0;
     Eigen::VectorXd derive = Eigen::VectorXd::Zero(12);
+    int leftknot = 0;
     int kstat = 0;
 
     s1221(curve_, 3, abscissa_s, &leftknot, &derive[0], &kstat );
     s2559(curve_, &abscissa_s, 1, &worldF_position[0], &tangent[0], &normal[0], &binormal[0], &statusFlag_);
 
+    Eigen::Vector3d r_prime = derive.segment(3,5);
+    Eigen::Vector3d r_2prime = derive.segment(6,8);
+    Eigen::Vector3d r_3prime = derive.segment(9,12);
+
+    double k = (r_prime.cross(r_2prime)).norm()/
+                std::pow((r_prime).norm(),3);
+    double tau = (r_prime.dot(r_3prime.cross(r_2prime)))/
+                std::pow(((r_prime).cross(r_2prime)).norm(),3);
+
+    double norm_r_prime = r_prime.norm();
+    der_tan = norm_r_prime*k*normal;
+    der_nor = norm_r_prime*(-k*tangent + tau*binormal);
+    der_bin = norm_r_prime*(-tau*normal);
 
 }

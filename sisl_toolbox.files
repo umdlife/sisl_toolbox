@@ -107,6 +107,8 @@ script/pathSection.txt
 script/plotter.py
 script/plotter_serpentine_generation.py
 script/polygon.txt
+sisl_toolbox.cflags
+sisl_toolbox.cxxflags
 src/circular_arc.cpp
 src/curve.cpp
 src/generic_curve.cpp
