@@ -22,8 +22,8 @@ int main() {
     //     << "]" << std::endl;
 
     try {
-        hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{-50, 5, 0}, Eigen::Vector3d{-45, -5, 0},
-                                                                            Eigen::Vector3d{-45, 5, 0}, Eigen::Vector3d{-50, -5, 0}});
+        hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{-50, 5, 0}, Eigen::Vector3d{-50, -5, 1},
+                                                                            Eigen::Vector3d{-45, -5, 1}, Eigen::Vector3d{-45, 5, 2}});
 
         // hippodrome = PathFactory::NewHippodrome(std::vector<Eigen::Vector3d>{Eigen::Vector3d{10, -50, 0}, Eigen::Vector3d{10, 50, 0}, 
         //                                                                    Eigen::Vector3d{-10, 50, 0}, Eigen::Vector3d{-10, -50, 0}});

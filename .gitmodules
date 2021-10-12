@@ -1,0 +1,3 @@
+[submodule "SISL"]
+	path = SISL
+	url = https://github.com/SINTEF-Geometry/SISL.git
