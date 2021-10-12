@@ -170,8 +170,8 @@ public:
     * @param[out] binormal Binormal component of the tangent 3D frame.
     * @param[out] Derivative of position,tanget,normal,binormal.
     */
-    void EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,Eigen::VectorXd& derivative);
-
+    void EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vector3d& normal, Eigen::Vector3d& binormal,
+                            Eigen::Vector3d& der_tan, Eigen::Vector3d& der_nor, Eigen::Vector3d& der_bin);
 
 
     friend std::ostream& operator<< (std::ostream& os, const Curve& obj) {
