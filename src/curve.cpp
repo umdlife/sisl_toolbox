@@ -299,25 +299,45 @@ void Curve::EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vect
 {
 
     std::array<double, 3> worldF_position{ 0 };
-    Eigen::VectorXd derive = Eigen::VectorXd::Zero(12);
+    std::vector<double> derive(12, 0);
     int leftknot = 0;
     int kstat = 0;
 
-    s1221(curve_, 3, abscissa_s, &leftknot, &derive[0], &kstat );
     s2559(curve_, &abscissa_s, 1, &worldF_position[0], &tangent[0], &normal[0], &binormal[0], &statusFlag_);
 
-    Eigen::Vector3d r_prime = derive.segment(3,5);
-    Eigen::Vector3d r_2prime = derive.segment(6,8);
-    Eigen::Vector3d r_3prime = derive.segment(9,12);
+    if(normal.norm() < 1e-10)
+    {
+        normal = Eigen::Vector3d(1,1,1);
+        Eigen::Matrix3d projector = Eigen::Matrix3d::Zero();
 
-    double k = (r_prime.cross(r_2prime)).norm()/
-                std::pow((r_prime).norm(),3);
-    double tau = (r_prime.dot(r_3prime.cross(r_2prime)))/
-                std::pow(((r_prime).cross(r_2prime)).norm(),3);
+        projector.diagonal() << tangent;
 
-    double norm_r_prime = r_prime.norm();
-    der_tan = norm_r_prime*k*normal;
-    der_nor = norm_r_prime*(-k*tangent + tau*binormal);
-    der_bin = norm_r_prime*(-tau*normal);
+        normal = (Eigen::Matrix3d::Identity() - projector) * normal;
+        normal.normalize();
+        binormal = tangent.cross(normal);
+        binormal.normalize();
+
+        der_bin = Eigen::Vector3d::Zero();
+        der_nor = Eigen::Vector3d::Zero();
+        der_tan = Eigen::Vector3d::Zero();
+    }
+    else
+    {   
+        s1227(curve_, 3, abscissa_s, &leftknot, &derive[0], &kstat );
+        
+        Eigen::Vector3d r_prime; r_prime << derive[3], derive[4], derive[5];
+        Eigen::Vector3d r_2prime; r_2prime << derive[6], derive[7], derive[8];
+        Eigen::Vector3d r_3prime; r_3prime << derive[9], derive[10], derive[11];
+
+        double k = (r_prime.cross(r_2prime)).norm()/
+                    std::pow((r_prime).norm(),3);
+        double tau = (r_prime.dot(r_3prime.cross(r_2prime)))/
+                    std::pow(((r_prime).cross(r_2prime)).norm(),3);
+
+        double norm_r_prime = r_prime.norm();
+        der_tan = norm_r_prime*k*normal;
+        der_nor = norm_r_prime*(-k*tangent + tau*binormal);
+        der_bin = norm_r_prime*(-tau*normal);
+    }
 
 }
