@@ -2,6 +2,8 @@
 
 #include "sisl_toolbox/curve.hpp"
 
+namespace sisl_toolbox
+{
 /**
  * @class CircularArc
  *
@@ -36,3 +38,5 @@ private:
     Eigen::Vector3d axis_;
     Eigen::Vector3d centrePoint_;
 };
+
+} // namespace sisl_toolbox

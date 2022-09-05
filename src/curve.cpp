@@ -1,6 +1,8 @@
 ﻿#include "sisl_toolbox/curve.hpp"
 #include "sisl.h"
 
+namespace sisl_toolbox
+{
 
 Curve::Curve(int dimension, int order) 
     : dimension_{dimension}
@@ -341,3 +343,5 @@ void Curve::EvalFSFrame(double abscissa_s, Eigen::Vector3d& tangent, Eigen::Vect
     }
 
 }
+
+} // namespace sisl_toolbox

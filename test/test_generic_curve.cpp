@@ -4,7 +4,7 @@
 
 #include <iomanip>
 
-
+using namespace sisl_toolbox;
 int main() {
 
     /***************** Path creation *****************/

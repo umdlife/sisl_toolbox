@@ -7,6 +7,8 @@
 #include <eigen3/Eigen/Dense>
 
 struct SISLCurve; /** Forward declaration */
+namespace sisl_toolbox
+{
 class CurveFactory; /** Forward declaration */
 
 /**
@@ -223,3 +225,4 @@ protected:
 };
 
 /*** NOTE: mkdir build -> cmake .. -DBUILD_TESTS=ON -> sudo make install ***/
+} // namespace sisl_toolbox

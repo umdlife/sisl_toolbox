@@ -6,6 +6,8 @@
 #include "sisl_toolbox/circular_arc.hpp"
 #include "sisl_toolbox/generic_curve.hpp"
 
+namespace sisl_toolbox
+{
 
 std::shared_ptr<Path> PathFactory::NewPolygonalChain(std::vector<Eigen::Vector3d> points) {
 
@@ -769,3 +771,4 @@ std::shared_ptr<Path> PathFactory::NewSerpentine(double angle, int direction, do
     return serpentine;
 }
 
+} // namespace sisl_toolbox

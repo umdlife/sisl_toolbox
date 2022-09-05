@@ -1,6 +1,9 @@
 #include "sisl_toolbox/generic_curve.hpp"
 #include "sisl.h"
 
+namespace sisl_toolbox
+{
+
 GenericCurve::GenericCurve(int degree, std::vector<double> knots, std::vector<Eigen::Vector3d> points, std::vector<double> weights, 
     std::vector<double> coefficients, int dimension, int order)
     : Curve(dimension, order)
@@ -53,3 +56,5 @@ GenericCurve::GenericCurve(int degree, std::vector<double> knots, std::vector<Ei
         startParameter_m_ = startParameter_s_ * (length_ / (endParameter_s_ - startParameter_s_));
         endParameter_m_ = endParameter_s_ * (length_ / (endParameter_s_ - startParameter_s_));
     }
+
+} // namespace sisl_toolbox

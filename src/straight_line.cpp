@@ -1,7 +1,8 @@
 #include "sisl_toolbox/straight_line.hpp"
 #include "sisl.h"
 
-
+namespace sisl_toolbox
+{
 StraightLine::StraightLine(Eigen::Vector3d startPoint, Eigen::Vector3d endPoint, int dimension, int order)
     : Curve(dimension, order)
     {        
@@ -39,3 +40,4 @@ StraightLine::StraightLine(Eigen::Vector3d startPoint, Eigen::Vector3d endPoint,
 
         }
     }
+} // namespace sisl_toolbox

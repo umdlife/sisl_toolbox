@@ -3,6 +3,8 @@
 #include "sisl_toolbox/curve.hpp" 
 #include <exception>
 
+namespace sisl_toolbox
+{
 Path::Path()
 : curvesNumber_{0} 
 , startParameter_m_{0}
@@ -484,3 +486,5 @@ void Path::EvalTangentFrame(double abscissa_m, Eigen::Vector3d& tangent, Eigen::
 
     curves_[curveId]->EvalTangentFrame(abscissaCurve, tangent, normal, binormal);
 }
+
+} // namespace sisl_toolbox

@@ -5,7 +5,8 @@
 #include <vector>
 #include <eigen3/Eigen/Dense>
 
-
+namespace sisl_toolbox
+{
 #define RIGHT 1
 #define LEFT 2
 
@@ -162,3 +163,4 @@ private:
 
 };
 
+} // namespace sisl_toolbox

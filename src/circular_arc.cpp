@@ -1,6 +1,8 @@
 #include "sisl_toolbox/circular_arc.hpp"
 #include "sisl.h"
 
+namespace sisl_toolbox
+{
 CircularArc::CircularArc(double angle, Eigen::Vector3d axis, Eigen::Vector3d startPoint, Eigen::Vector3d centrePoint, int dimension, int order) 
     : Curve(dimension, order)
     , angle_{angle}
@@ -32,3 +34,4 @@ CircularArc::CircularArc(double angle, Eigen::Vector3d axis, Eigen::Vector3d sta
         
     }
 
+} // namespace sisl_toolbox

@@ -1,6 +1,7 @@
 #include "sisl_toolbox/persistence_manager.hpp"
 
-
+namespace sisl_toolbox
+{
 bool PersistenceManager::SaveObj(std::shared_ptr<std::vector<Eigen::Vector3d>> points, std::string const& path) {
 
     try {
@@ -21,3 +22,5 @@ bool PersistenceManager::SaveObj(std::shared_ptr<std::vector<Eigen::Vector3d>> p
         return false;
     }
 }
+
+} // namespace sisl_toolbox

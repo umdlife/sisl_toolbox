@@ -5,6 +5,8 @@
 
 #include "sisl_toolbox/curve.hpp"
 
+namespace sisl_toolbox
+{
 /**
  * @class GenericCurve
  *
@@ -43,3 +45,5 @@ private:
     std::vector<double> weights_;
     std::vector<double> coefficients_;
 };
+
+} // namespace sisl_toolbox

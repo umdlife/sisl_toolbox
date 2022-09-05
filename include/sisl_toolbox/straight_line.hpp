@@ -2,6 +2,8 @@
 
 #include "sisl_toolbox/curve.hpp"
 
+namespace sisl_toolbox
+{
 /**
  * @class StraightLine
  *
@@ -26,3 +28,5 @@ public:
 private:    
     
 };
+
+} // namespace sisl_toolbox

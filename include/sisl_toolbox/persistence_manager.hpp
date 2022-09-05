@@ -7,6 +7,8 @@
 
 #include <eigen3/Eigen/Dense>
 
+namespace sisl_toolbox
+{
 /**
  * @class PersistenceManager
  *
@@ -28,3 +30,5 @@ class PersistenceManager {
 
     private:
 };
+
+} // namespace sisl_toolbox

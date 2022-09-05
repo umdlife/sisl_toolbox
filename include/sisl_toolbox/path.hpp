@@ -7,6 +7,8 @@
 #include <map>
 #include <eigen3/Eigen/Dense>
 
+namespace sisl_toolbox
+{
 class PathFactory;
 class Curve;
 
@@ -243,3 +245,4 @@ private:
 
 };
 
+} // namespace sisl_toolbox
