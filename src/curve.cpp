@@ -132,21 +132,32 @@ Eigen::Vector3d Curve::At(double abscissa_m) {
 
 std::vector<Eigen::Vector3d> Curve::Derivate(int order, double abscissa_m) {
 
+    std::cout << "******************************derivates Call: " << std::endl;
+
     std::vector<Eigen::Vector3d> derivates{};
-    std::vector<double> derivatesTmp(order * dimension_, 0);
+    derivates.reserve(order * dimension_);
+    std::vector<double> derivatesTmp(order * dimension_, 0.0);
 
     int leftknot{0}; // The SISL routine needs this variable, but it does not use the value.
-    double abscissa_s{};
+    double abscissa_s{0.0};
     try {
         abscissa_s = MeterAbsToSislAbs(abscissa_m);
     } catch(std::runtime_error const& exception) {
         throw std::runtime_error(std::string("[Curve::Derivate] -> ") + exception.what());
     }    
-
+    std::cout << "******************************derivates: " << std::endl;
     s1227(curve_, order, abscissa_s, &leftknot, &derivatesTmp[0], &statusFlag_);
-
+    std::cout << "******************************derivatesTmp size: " << derivatesTmp.size() << std::endl;
+    std::cout << "******************************derivatesTmp Values: " << derivatesTmp[0] <<" , " << derivatesTmp[1] <<" , " << derivatesTmp[2] << std::endl;
+    
     for(int i = 1; i <= order; ++i) {
         derivates.emplace_back(Eigen::Vector3d{derivatesTmp[i*3], derivatesTmp[i*3 + 1], derivatesTmp[i*3 + 2]});
+                // Eigen::Vector3d v(derivatesTmp[i], derivatesTmp[i+1], derivatesTmp[i+2]);
+        std::cout << "******************************derivatesTmp Values: " << derivatesTmp[0] <<" , " << derivatesTmp[1] <<" , " << derivatesTmp[2] << std::endl;
+
+        //derivates.push_back(v); // fix 2nd and 3rd to be the same value, not used in path follower
+        std::cout << "******************************derivatesTmp Values: " << derivatesTmp[0] <<" , " << derivatesTmp[1] <<" , " << derivatesTmp[2] << std::endl;
+
     }
 
     return derivates;
@@ -209,10 +220,13 @@ std::tuple<double, double> Curve::FindClosestPoint(Eigen::Vector3d& worldF_posit
     double abscissa_s{0};
     double epsco{0}; // Computational resolution (not used)
     double abscissa_m{0};
-
+    std::cout << "FindClosestPoint: X: " << worldF_position[0] << " Y: " << worldF_position[1] << " Z: " << worldF_position[2] << std::endl;
     s1957(curve_, &worldF_position[0], dimension_, epsco, epsge_, &abscissa_s, &distance, &statusFlag_);
+    std::cout << "FindClosestPoint: X: " << worldF_position[0] << " Y: " << worldF_position[1] << " Z: " << worldF_position[2] << std::endl;
     try {
         abscissa_m = SislAbsToMeterAbs(abscissa_s);
+    std::cout << "FindClosestPoint: X: " << worldF_position[0] << " Y: " << worldF_position[1] << " Z: " << worldF_position[2] << std::endl;
+
     } catch(std::runtime_error const& exception) {
         throw std::runtime_error(std::string("[Curve::FindClosestPoint] -> ") + exception.what());
     }
